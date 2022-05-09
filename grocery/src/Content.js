@@ -1,13 +1,42 @@
+import { useState } from "react";
+
 const Content = () => {
-  const handleNameChange = () => {
-    const names = ["Yasi", "Yasaman", "Yasamanjoon"];
-    let random = Math.floor(Math.random() * names.length);
-    return names[random];
+  const [count, setCount] = useState(0);
+  const [items, setItem] = useState([
+    {
+      id: 1,
+      checked: false,
+      item: "chocolate",
+    },
+    {
+      id: 2,
+      checked: false,
+      item: "water",
+    },
+    {
+      id: 3,
+      checked: false,
+      item: "apple",
+    },
+  ]);
+
+  const handleAdd = () => {
+    setCount(count + 1);
   };
 
   return (
     <main>
-      <p>Hello, {handleNameChange()}! Let's add our groceries for today.</p>
+      <ul>
+        {items.map((grocery) => (
+          <li className="item" key={grocery.id}>
+            <input type="checkbox" checked={grocery.checked} />
+            <label>{grocery.item}</label>
+            <button>Delete</button>
+          </li>
+        ))}
+      </ul>
+      <p>Items: {count}</p>
+      <button onClick={handleAdd}>ADD </button>
     </main>
   );
 };

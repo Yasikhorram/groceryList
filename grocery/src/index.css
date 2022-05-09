@@ -54,3 +54,7 @@ footer {
   display: grid;
   place-content: center;
 }
+
+.item {
+  list-style-type: none;
+}
