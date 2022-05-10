@@ -8,6 +8,11 @@ const Content = ({ items, setItem }) => {
     setItem(listItems);
   };
 
+  const handleDelete = (id) => {
+    const newArr = items.filter((item) => id !== item.id);
+    setItem(newArr);
+  };
+
   return (
     <main>
       <ul>
@@ -18,9 +23,19 @@ const Content = ({ items, setItem }) => {
               checked={grocery.checked}
               onChange={() => handleCheck(grocery.id)}
             />
-            <label>{grocery.item}</label>
+            <label
+              style={
+                grocery.checked ? { textDecoration: "line-through" } : grocery
+              }
+            >
+              {grocery.item}
+            </label>
 
-            <FaTrashAlt role="button" tabIndex="0" />
+            <FaTrashAlt
+              role="button"
+              tabIndex="0"
+              onClick={() => handleDelete(grocery.id)}
+            />
           </li>
         ))}
       </ul>
