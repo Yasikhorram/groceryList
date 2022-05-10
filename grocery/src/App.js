@@ -6,6 +6,24 @@ import { useState } from "react";
 function App() {
   const [name, setName] = useState("Yas");
 
+  const [items, setItem] = useState([
+    {
+      id: 1,
+      checked: false,
+      item: "chocolate",
+    },
+    {
+      id: 2,
+      checked: false,
+      item: "water",
+    },
+    {
+      id: 3,
+      checked: false,
+      item: "apple",
+    },
+  ]);
+
   const handleNameChange = () => {
     let names = ["Yasi", "Yasaman", "YasamanJoon"];
     let random = Math.floor(Math.random() * names.length);
@@ -14,11 +32,11 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header title="Groceries" />
       <p>Hello, {name}! Let's add our groceries.</p>
       <button onClick={handleNameChange}>Change Name </button>
-      <Content />
-      <Footer />
+      <Content items={items} setItem={setItem} />
+      <Footer length={items.length} />
     </div>
   );
 }
