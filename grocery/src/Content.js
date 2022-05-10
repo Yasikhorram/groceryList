@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaTrashAlt } from "react-icons/fa";
 
 const Content = () => {
   const [count, setCount] = useState(0);
@@ -31,12 +32,15 @@ const Content = () => {
           <li className="item" key={grocery.id}>
             <input type="checkbox" checked={grocery.checked} />
             <label>{grocery.item}</label>
-            <button>Delete</button>
+
+            <span> {count}</span>
+
+            <FaTrashAlt role="button" tabIndex="0" />
           </li>
         ))}
       </ul>
-      <p>Items: {count}</p>
-      <button onClick={handleAdd}>ADD </button>
+      <p>{count}</p>
+      <button onClick={handleAdd}>Add items</button>
     </main>
   );
 };
