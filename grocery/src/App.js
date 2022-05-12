@@ -24,6 +24,7 @@ function App() {
       item: "apple",
     },
   ]);
+  const [newItem, setNewItem] = useState("");
 
   const handleNameChange = () => {
     let names = ["Yasi", "Yasaman", "YasamanJoon"];
@@ -31,10 +32,21 @@ function App() {
     return setName(names[random]);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!newItem) return;
+    setNewItem("");
+    console.log("submited");
+  };
+
   return (
     <div className="App">
       <Header title="Groceries" />
-      <AddItem />
+      <AddItem
+        newItem={newItem}
+        setNewItem={setNewItem}
+        handleSubmit={handleSubmit}
+      />
       <p>Hello, {name}! Let's add our groceries.</p>
       <button onClick={handleNameChange}>Change Name </button>
       <Content items={items} setItem={setItem} />
