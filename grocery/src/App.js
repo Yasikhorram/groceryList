@@ -26,6 +26,14 @@ function App() {
   ]);
   const [newItem, setNewItem] = useState("");
 
+  const addItem = (item) => {
+    const id = items.length ? items[items.length - 1].id + 1 : 1;
+    const myNewItem = { id, checked: false, item };
+    const listItems = [...items, myNewItem];
+    setItem(listItems);
+    localStorage.setItem("shoppingList", JSON.stringify(listItems));
+  };
+
   const handleNameChange = () => {
     let names = ["Yasi", "Yasaman", "YasamanJoon"];
     let random = Math.floor(Math.random() * names.length);
