@@ -6,11 +6,13 @@ const Content = ({ items, setItem }) => {
       item.id === id ? { ...item, checked: !item.checked } : item
     );
     setItem(listItems);
+    localStorage.setItem("shoppingList", JSON.stringify(listItems));
   };
 
   const handleDelete = (id) => {
     const newArr = items.filter((item) => id !== item.id);
     setItem(newArr);
+    localStorage.setItem("shoppingList", JSON.stringify(newArr));
   };
 
   return (

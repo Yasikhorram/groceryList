@@ -6,23 +6,26 @@ import { useState } from "react";
 
 function App() {
   const [name, setName] = useState("Yas");
-  const [items, setItem] = useState([
-    {
-      id: 1,
-      checked: false,
-      item: "chocolate",
-    },
-    {
-      id: 2,
-      checked: false,
-      item: "water",
-    },
-    {
-      id: 3,
-      checked: false,
-      item: "apple",
-    },
-  ]);
+  const [items, setItem] = useState(
+    JSON.parse(localStorage.getItem("shoppingList"))
+    //   [
+    //   {
+    //     id: 1,
+    //     checked: false,
+    //     item: "chocolate",
+    //   },
+    //   {
+    //     id: 2,
+    //     checked: false,
+    //     item: "water",
+    //   },
+    //   {
+    //     id: 3,
+    //     checked: false,
+    //     item: "apple",
+    //   },
+    // ]
+  );
   const [newItem, setNewItem] = useState("");
 
   const addItem = (item) => {
