@@ -6,7 +6,6 @@ import { useState } from "react";
 
 function App() {
   const [name, setName] = useState("Yas");
-
   const [items, setItem] = useState([
     {
       id: 1,
@@ -43,8 +42,8 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!newItem) return;
+    addItem(newItem);
     setNewItem("");
-    console.log("submited");
   };
 
   return (
