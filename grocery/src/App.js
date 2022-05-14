@@ -51,18 +51,30 @@ function App() {
     setNewItem("");
   };
 
+  const handleSearch = (search) => {
+    items.filter((element) =>
+      element.item === search ? setItem(search) : items
+    );
+  };
+
   return (
     <div className="App">
       <Header title="Groceries" />
-      <SearchItem />
+      <SearchItem search={search} setSearch={setSearch} />
       <AddItem
         newItem={newItem}
         setNewItem={setNewItem}
         handleSubmit={handleSubmit}
+        handleSearch={handleSearch}
       />
       <p>Hello, {name}! Let's add our groceries.</p>
       <button onClick={handleNameChange}>Change Name </button>
-      <Content items={items} setItem={setItem} />
+      <Content
+        items={items.filter((element) =>
+          element.item.toLowerCase().includes(search.toLowerCase())
+        )}
+        setItem={setItem}
+      />
 
       <Footer length={items.length} />
     </div>
