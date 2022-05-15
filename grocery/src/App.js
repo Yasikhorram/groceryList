@@ -3,12 +3,12 @@ import AddItem from "./AddItem";
 import Content from "./Content";
 import Footer from "./Footer";
 import SearchItem from "./SearchItem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [name, setName] = useState("Yas");
   const [items, setItem] = useState(
-    JSON.parse(localStorage.getItem("shoppingList"))
+    JSON.parse(localStorage.getItem("shoppingList") || [])
     //   [
     //   {
     //     id: 1,
@@ -29,6 +29,8 @@ function App() {
   );
   const [newItem, setNewItem] = useState("");
   const [search, setSearch] = useState("");
+
+  useEffect(() => console.log("use effect just ran"));
 
   const addItem = (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
