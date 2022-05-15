@@ -30,14 +30,15 @@ function App() {
   const [newItem, setNewItem] = useState("");
   const [search, setSearch] = useState("");
 
-  useEffect(() => console.log("use effect just ran"));
+  useEffect(() => {
+    localStorage.setItem("shoppingList", JSON.stringify(items));
+  }, [items]);
 
   const addItem = (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
     const myNewItem = { id, checked: false, item };
     const listItems = [...items, myNewItem];
     setItem(listItems);
-    localStorage.setItem("shoppingList", JSON.stringify(listItems));
   };
 
   const handleNameChange = () => {
