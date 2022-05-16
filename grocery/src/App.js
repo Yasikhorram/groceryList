@@ -6,6 +6,7 @@ import SearchItem from "./SearchItem";
 import { useState, useEffect } from "react";
 
 function App() {
+  const API_URL = "http://localhost:3500/items";
   const [name, setName] = useState("Yas");
   const [items, setItem] = useState(
     JSON.parse(localStorage.getItem("shoppingList") || [])
@@ -31,8 +32,18 @@ function App() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    localStorage.setItem("shoppingList", JSON.stringify(items));
-  }, [items]);
+    const fetchItems = async () => {
+      try {
+        const resp = await fetch(API_URL);
+        const listItems = await resp.json();
+        console.log("listItems are:", listItems);
+        setItem(listItems);
+      } catch (err) {
+        console.log(err.stack);
+      }
+    };
+    fetchItems();
+  }, []);
 
   const addItem = (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
