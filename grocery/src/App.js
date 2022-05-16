@@ -31,6 +31,7 @@ function App() {
   const [newItem, setNewItem] = useState("");
   const [search, setSearch] = useState("");
   const [fetchErr, setFetchErr] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -42,11 +43,16 @@ function App() {
         const listItems = await resp.json();
         console.log("listItems are:", listItems);
         setItem(listItems);
+        setFetchErr(null);
       } catch (err) {
-        console.log(err.stack);
+        setFetchErr(err.message);
+      } finally {
+        setIsLoading(false);
       }
     };
-    fetchItems();
+    setTimeout(() => {
+      (async () => await fetchItems())();
+    }, 1000);
   }, []);
 
   const addItem = (item) => {
@@ -87,12 +93,15 @@ function App() {
       />
       <p>Hello, {name}! Let's add our groceries.</p>
       <button onClick={handleNameChange}>Change Name </button>
-      <Content
-        items={items.filter((element) =>
-          element.item.toLowerCase().includes(search.toLowerCase())
-        )}
-        setItem={setItem}
-      />
+      {isLoading && <p>is loading...</p>}
+      {!isLoading && (
+        <Content
+          items={items.filter((element) =>
+            element.item.toLowerCase().includes(search.toLowerCase())
+          )}
+          setItem={setItem}
+        />
+      )}
 
       <Footer length={items.length} />
     </div>
