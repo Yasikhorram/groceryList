@@ -30,11 +30,15 @@ function App() {
   );
   const [newItem, setNewItem] = useState("");
   const [search, setSearch] = useState("");
+  const [fetchErr, setFetchErr] = useState(null);
 
   useEffect(() => {
     const fetchItems = async () => {
       try {
         const resp = await fetch(API_URL);
+        if (!resp.ok) {
+          throw Error("Did not recieved expected data");
+        }
         const listItems = await resp.json();
         console.log("listItems are:", listItems);
         setItem(listItems);
